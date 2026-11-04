@@ -230,6 +230,12 @@ class HiveService {
     await _settingsBox.put('${profileId}_level_stars', starsMap);
   }
 
+  String getAppLanguage() => _settingsBox.get('app_language')?.toString() ?? 'pt';
+
+  Future<void> setAppLanguage(String language) async {
+    await _settingsBox.put('app_language', language);
+  }
+
   String getThemePack() {
     final profileId = _getActiveProfileIdSync();
     return _settingsBox.get('${profileId}_theme_pack')?.toString() ?? 'alchemy';
