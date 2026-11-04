@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 /// Serviço de anúncios recompensados.
@@ -35,33 +37,39 @@ class AdService {
     );
   }
 
-  /// Retorna true somente se o callback confirmar que a recompensa foi ganha.
-  Future<bool> showRewarded() async {
+  /// Aguarda o fechamento do anúncio e retorna true apenas se a recompensa
+  /// tiver sido confirmada pelo callback oficial do SDK.
+  Future<bool> showRewarded() {
     final ad = _rewardedAd;
     if (ad == null) {
       loadRewarded();
-      return false;
+      return Future.value(false);
     }
 
     _rewardedAd = null;
+    final result = Completer<bool>();
     var earnedReward = false;
+
     ad.fullScreenContentCallback = FullScreenContentCallback(
       onAdDismissedFullScreenContent: (closedAd) {
         closedAd.dispose();
+        if (!result.isCompleted) result.complete(earnedReward);
         loadRewarded();
       },
       onAdFailedToShowFullScreenContent: (failedAd, _) {
         failedAd.dispose();
+        if (!result.isCompleted) result.complete(false);
         loadRewarded();
       },
     );
 
-    await ad.show(
+    ad.show(
       onUserEarnedReward: (_, __) {
         earnedReward = true;
       },
     );
-    return earnedReward;
+
+    return result.future;
   }
 
   void dispose() {
