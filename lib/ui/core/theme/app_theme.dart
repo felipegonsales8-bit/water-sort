@@ -8,6 +8,20 @@ class AppTheme {
     brightness: Brightness.dark,
     scaffoldBackgroundColor: AppColors.bg, // Deep Off-Black (#121212)
     fontFamily: 'BebasNeue', // Set default fallback font family globally
+    colorScheme: ColorScheme.dark(
+      primary: AppColors.accent,
+      secondary: const Color(0xFF7A5AA6),
+      surface: AppColors.darkSurface,
+      onSurface: AppColors.headingWhite,
+    ),
+    cardTheme: CardThemeData(
+      color: AppColors.darkCard,
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(color: AppColors.accent.withValues(alpha: 0.28)),
+      ),
+    ),
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.transparent,
       elevation: 0,
