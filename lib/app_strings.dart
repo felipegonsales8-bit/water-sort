@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 /// Lightweight in-app copy for the first supported languages.
 class AppStrings {
   AppStrings._();
