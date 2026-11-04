@@ -15,6 +15,7 @@ void main() async {
   // Inicializa o SDK de anúncios; o manifesto ainda usa o App ID oficial de teste.
   await MobileAds.instance.initialize();
   AdService.instance.loadRewarded();
+  AdService.instance.loadInterstitial();
 
   final hiveService = HiveService();
   await hiveService.init();
