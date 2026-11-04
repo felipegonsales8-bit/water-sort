@@ -94,23 +94,24 @@ class AppColors {
   static Color get lightCard => const Color(0xFF2A2030);
   static Color get lightBorder => accent;
 
+  // Jewel-toned alchemy palette used for the potion layers.
   static const List<Color> defaultWaterColors = [
-    Color(0xFFE53935),
-    Color(0xFF1E88E5),
-    Color(0xFF43A047),
-    Color(0xFFFDD835),
-    Color(0xFFFF8F00),
-    Color(0xFF8E24AA),
-    Color(0xFFEC407A),
-    Color(0xFF00ACC1),
-    Color(0xFFB39DDB),
-    Color(0xFFFF7043),
-    Color(0xFF5C6BC0),
-    Color(0xFF009688),
-    Color(0xFF8D6E63),
-    Color(0xFFB71C1C),
-    Color(0xFFAD1457),
-    Color(0xFF9E9D24),
+    Color(0xFFB23A6F), // Ruby
+    Color(0xFF3978C6), // Sapphire
+    Color(0xFF4E9B72), // Emerald
+    Color(0xFFD4A843), // Amber
+    Color(0xFFB76E36), // Copper
+    Color(0xFF8052B8), // Amethyst
+    Color(0xFFCF5B8E), // Rose quartz
+    Color(0xFF3E9EA3), // Aquamarine
+    Color(0xFF9D8BC8), // Lavender
+    Color(0xFFD87552), // Fire opal
+    Color(0xFF5C6BC0), // Tanzanite
+    Color(0xFF218C82), // Jade
+    Color(0xFF8D6E63), // Smoky quartz
+    Color(0xFF9F3448), // Garnet
+    Color(0xFFAD527D), // Tourmaline
+    Color(0xFF9E9D24), // Peridot
   ];
 
   static List<Color> _waterColors = List.of(defaultWaterColors);
