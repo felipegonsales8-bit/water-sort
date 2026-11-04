@@ -40,6 +40,11 @@ class ProgressRepository {
     return _cachedProgress!;
   }
 
+  String getAppLanguage() => _hiveService.getAppLanguage();
+
+  Future<void> setAppLanguage(String language) =>
+      _hiveService.setAppLanguage(language);
+
   Future<void> saveProgress(UserProgress progress) async {
     _cachedProgress = progress;
     _progressController.add(progress);
