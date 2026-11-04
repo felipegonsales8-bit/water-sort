@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'package:watersort/data/services/hive_service.dart';
 import 'package:watersort/ui/core/theme/app_theme.dart';
@@ -9,6 +10,9 @@ import 'package:watersort/ui/features/home/views/home_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Inicializa o SDK de anúncios; o manifesto ainda usa o App ID oficial de teste.
+  await MobileAds.instance.initialize();
 
   final hiveService = HiveService();
   await hiveService.init();
@@ -33,7 +37,7 @@ class WaterSortApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Water Sort',
+      title: 'Potion Master',
       theme: AppTheme.dark,
       darkTheme: AppTheme.dark,
       themeMode: ThemeMode.dark,
