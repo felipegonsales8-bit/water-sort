@@ -123,7 +123,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
 
               // Game Title
               Text(
-                'WATER SORT',
+                'POTION MASTER',
                 style: TextStyle(
                   fontFamily: 'BebasNeue',
                   fontSize: 54,
@@ -134,7 +134,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
               ),
               const SizedBox(height: 4),
               Text(
-                'A COZY COLOR SORTING GAME',
+                'SORT MAGICAL POTIONS • MASTER THE ARCANE',
                 style: TextStyle(
                   fontFamily: 'BebasNeue',
                   fontSize: 15,
