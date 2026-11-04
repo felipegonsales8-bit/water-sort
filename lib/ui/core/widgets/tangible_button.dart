@@ -38,7 +38,7 @@ class _TangibleButtonState extends State<TangibleButton> {
 
     final textColor = isActive
         ? const Color(0xFF121212) // Black text when active/hovered
-        : Colors.white; // White text normally
+        : const Color(0xFFFFF4D8); // Warm parchment text
 
     // 3D double-stroke offset at the very bottom (only for active CTA buttons)
     final show3DShadow = !widget.isSecondary && !isActive;
