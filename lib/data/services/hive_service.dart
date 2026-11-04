@@ -111,7 +111,7 @@ class HiveService {
   bool isSuperHardModeEnabled() {
     final profileId = _getActiveProfileIdSync();
     final val = _settingsBox.get('${profileId}_super_hard_mode');
-    return val == true;
+    return val == null ? true : val == true;
   }
 
   Future<void> setSuperHardModeEnabled(bool enabled) async {
