@@ -229,7 +229,7 @@ class _MultiplayerViewState extends ConsumerState<MultiplayerView> {
                             onPressed: () {
                               Clipboard.setData(ClipboardData(text: code));
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
+                                SnackBar(
                                   content: Text(AppStrings.t('room_code_copied', language)),
                                   duration: Duration(seconds: 2),
                                 ),
@@ -306,7 +306,7 @@ class _MultiplayerViewState extends ConsumerState<MultiplayerView> {
                         final decoded = _decodeRoom(_codeController.text);
                         if (decoded == null) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
+                            SnackBar(
                               content: Text(AppStrings.t('invalid_room_code', language)),
                               duration: Duration(seconds: 2),
                             ),
