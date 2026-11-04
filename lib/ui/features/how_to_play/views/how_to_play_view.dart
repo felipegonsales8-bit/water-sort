@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:watersort/ui/core/theme/app_colors.dart';
+import 'package:watersort/app_strings.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:watersort/ui/providers.dart';
 import 'package:watersort/ui/core/widgets/tangible_button.dart';
 
-class HowToPlayView extends StatelessWidget {
+class HowToPlayView extends ConsumerWidget {
   const HowToPlayView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final language = ref.watch(homeViewModelProvider).language;
     return Scaffold(
       backgroundColor: AppColors.bg,
       body: SafeArea(
@@ -40,7 +44,7 @@ class HowToPlayView extends StatelessWidget {
                   Expanded(
                     child: Center(
                       child: Text(
-                        'HOW TO PLAY',
+                        AppStrings.t('how_to_play_title', language),
                         style: TextStyle(
                           fontFamily: 'BebasNeue',
                           fontSize: 26,
@@ -67,30 +71,34 @@ class HowToPlayView extends StatelessWidget {
                     const SizedBox(height: 12),
                     _step(
                       1,
-                      'Select a Tube',
-                      'Tap any tube to select it. The tube will float up and glow to show it is selected.',
+                      AppStrings.t('step_select_tube', language),
+                      AppStrings.t('step_select_tube_desc', language),
                       Icons.touch_app_rounded,
+                      language,
                     ),
                     const SizedBox(height: 16),
                     _step(
                       2,
-                      'Pour into Matching Color',
-                      'Tap another tube to pour. Water can only be poured onto the same color or into an empty tube.',
+                      AppStrings.t('step_pour', language),
+                      AppStrings.t('step_pour_desc', language),
                       Icons.water_drop_rounded,
+                      language,
                     ),
                     const SizedBox(height: 16),
                     _step(
                       3,
-                      'Sort All Colors',
-                      'Organize all water segments so each tube contains only one single color.',
+                      AppStrings.t('step_sort', language),
+                      AppStrings.t('step_sort_desc', language),
                       Icons.done_all_rounded,
+                      language,
                     ),
                     const SizedBox(height: 16),
                     _step(
                       4,
-                      'Elder & Child Friendly',
-                      'Use the distinct symbols inside each water block to match colors easily without eye strain.',
+                      AppStrings.t('step_symbols', language),
+                      AppStrings.t('step_symbols_desc', language),
                       Icons.accessibility_new_rounded,
+                      language,
                     ),
                     const SizedBox(height: 32),
                   ],
@@ -102,7 +110,7 @@ class HowToPlayView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(24),
               child: TangibleButton(
-                text: 'Got It!',
+                text: AppStrings.t('got_it', language),
                 onPressed: () => Navigator.pop(context),
               ),
             ),
@@ -112,7 +120,7 @@ class HowToPlayView extends StatelessWidget {
     );
   }
 
-  Widget _step(int num, String title, String desc, IconData icon) {
+  Widget _step(int num, String title, String desc, IconData icon, String language) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -152,7 +160,7 @@ class HowToPlayView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'STEP $num',
+                  '${language == 'pt' ? 'ETAPA' : language == 'es' ? 'PASO' : 'STEP'} $num',
                   style: TextStyle(
                     fontFamily: 'BebasNeue',
                     fontSize: 14,
