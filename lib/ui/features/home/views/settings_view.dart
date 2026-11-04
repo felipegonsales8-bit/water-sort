@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:watersort/ui/core/theme/app_colors.dart';
+import 'package:watersort/app_strings.dart';
 import 'package:watersort/ui/providers.dart';
 
 class SettingsView extends ConsumerWidget {
@@ -263,7 +264,7 @@ class SettingsView extends ConsumerWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        'SETTINGS',
+                        AppStrings.t('settings', state.language),
                         style: TextStyle(
                           fontFamily: 'BebasNeue',
                           fontSize: 26,
@@ -292,15 +293,68 @@ class SettingsView extends ConsumerWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 18),
                 children: [
                   _buildSectionHeader(
+                    icon: Icons.translate_rounded,
+                    title: AppStrings.t('language', state.language),
+                  ),
+                  _buildCardGroup(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              AppStrings.t('language_description', state.language),
+                              style: TextStyle(color: AppColors.subtext, fontSize: 13),
+                            ),
+                            const SizedBox(height: 10),
+                            DropdownButtonFormField<String>(
+                              value: state.language,
+                              dropdownColor: AppColors.darkCard,
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: AppColors.darkSurface,
+                                contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: BorderSide(color: AppColors.accent.withValues(alpha: 0.45)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: BorderSide(color: AppColors.accent),
+                                ),
+                              ),
+                              style: TextStyle(
+                                color: AppColors.headingWhite,
+                                fontFamily: 'BebasNeue',
+                                fontSize: 18,
+                              ),
+                              items: const [
+                                DropdownMenuItem(value: 'pt', child: Text('Português')),
+                                DropdownMenuItem(value: 'en', child: Text('English')),
+                                DropdownMenuItem(value: 'es', child: Text('Español')),
+                              ],
+                              onChanged: (value) {
+                                if (value != null) {
+                                  ref.read(homeViewModelProvider.notifier).setLanguage(value);
+                                }
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  _buildSectionHeader(
                     icon: Icons.sports_esports_rounded,
-                    title: 'GAMEPLAY & RULES',
+                    title: AppStrings.t('gameplay_rules', state.language),
                   ),
                   _buildCardGroup(
                     children: [
                       _buildSettingRow(
                         icon: Icons.timer_rounded,
                         iconColor: const Color(0xFF38BDF8),
-                        title: 'GAMEPLAY TIMER',
+                        title: AppStrings.t('gameplay_timer', state.language),
                         description:
                             'Add countdown timer to levels for an extra challenge, or keep it off to play relaxed.',
                         value: state.isTimerEnabled,
@@ -312,9 +366,9 @@ class SettingsView extends ConsumerWidget {
                       _buildSettingRow(
                         icon: Icons.lightbulb_rounded,
                         iconColor: const Color(0xFFFFB300),
-                        title: 'HINT HELPER',
+                        title: AppStrings.t('hint_helper', state.language),
                         description:
-                            'Show a hint button during gameplay to highlight the next optimal move.',
+                            AppStrings.t('hint_description', state.language),
                         value: state.isHintHelperEnabled,
                         onTap: () => ref
                             .read(homeViewModelProvider.notifier)
@@ -325,7 +379,7 @@ class SettingsView extends ConsumerWidget {
                         _buildSettingRow(
                           icon: Icons.check_circle_outline_rounded,
                           iconColor: const Color(0xFF10B981),
-                          title: 'CHECK BUTTON',
+                          title: AppStrings.t('check_button', state.language),
                           description:
                               'Replace the hint button with a check button that tells if the level is solvable via tooltip without giving hints.',
                           value: state.isCheckButtonEnabled,
@@ -362,7 +416,7 @@ class SettingsView extends ConsumerWidget {
                   ),
                   _buildSectionHeader(
                     icon: Icons.volume_up_rounded,
-                    title: 'AUDIO & ANIMATIONS',
+                    title: AppStrings.t('audio_animations', state.language),
                   ),
                   _buildCardGroup(
                     children: [
@@ -371,7 +425,7 @@ class SettingsView extends ConsumerWidget {
                             ? Icons.volume_up_rounded
                             : Icons.volume_off_rounded,
                         iconColor: const Color(0xFF34D399),
-                        title: 'SOUND EFFECTS',
+                        title: AppStrings.t('sound_effects', state.language),
                         description:
                             'Liquid pouring sounds, tube completion chimes, and victory fanfare.',
                         value: state.isSoundEffectsEnabled,
