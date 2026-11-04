@@ -26,7 +26,7 @@ class HomeViewModelState {
     this.isSoundEffectsEnabled = true,
     this.tubeSize = 'medium',
     this.levelStars = const {},
-    this.activeTheme = ThemePack.midnight,
+    this.activeTheme = ThemePack.alchemy,
     this.areThemesUnlocked = false,
     this.customBackgroundImagePath,
     this.customWaterColors = AppColors.defaultWaterColors,
@@ -148,7 +148,7 @@ class HomeViewModel extends StateNotifier<HomeViewModelState> {
       final customBgPath = _progressRepository.getCustomBackgroundImagePath();
       final theme = ThemePack.values.firstWhere(
         (t) => t.name == themeName,
-        orElse: () => ThemePack.midnight,
+        orElse: () => ThemePack.alchemy,
       );
       AppColors.setTheme(theme);
       final waterColors = _progressRepository.getWaterColors();
