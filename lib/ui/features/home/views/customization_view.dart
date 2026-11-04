@@ -97,6 +97,11 @@ class CustomizationView extends ConsumerWidget {
       bg: Color(0xFF200F00),
       accent: Color(0xFFFFCC00),
     ),
+    ThemePack.alchemy: _ThemeSpec(
+      name: 'ALCHEMY',
+      bg: Color(0xFF17111F),
+      accent: Color(0xFFC69A4A),
+    ),
   };
 
   @override
