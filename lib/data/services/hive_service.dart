@@ -111,7 +111,7 @@ class HiveService {
   bool isSuperHardModeEnabled() {
     final profileId = _getActiveProfileIdSync();
     final val = _settingsBox.get('${profileId}_super_hard_mode');
-    return val == null ? true : val == true;
+    return val == true;
   }
 
   Future<void> setSuperHardModeEnabled(bool enabled) async {
@@ -144,7 +144,7 @@ class HiveService {
   bool isHintHelperEnabled() {
     final profileId = _getActiveProfileIdSync();
     final val = _settingsBox.get('${profileId}_hint_helper');
-    return val == true;
+    return val == null ? true : val == true;
   }
 
   Future<void> setHintHelperEnabled(bool enabled) async {
