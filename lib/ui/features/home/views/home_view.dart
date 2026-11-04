@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:watersort/ui/core/theme/app_colors.dart';
+import 'package:watersort/app_strings.dart';
 import 'package:watersort/ui/core/widgets/tangible_button.dart';
 import 'package:watersort/ui/features/game/views/game_view.dart';
 import 'package:watersort/ui/features/how_to_play/views/how_to_play_view.dart';
@@ -143,7 +144,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
               ),
               const SizedBox(height: 4),
               Text(
-                'SORT MAGICAL POTIONS • MASTER THE ARCANE',
+                AppStrings.t('tagline', state.language),
                 style: TextStyle(
                   fontFamily: 'BebasNeue',
                   fontSize: 15,
@@ -175,7 +176,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
                     ],
                   ),
                   child: Text(
-                    'Level ${state.progress!.currentLevel}',
+                    '${AppStrings.t('level', state.language)} ${state.progress!.currentLevel}',
                     style: TextStyle(
                       fontFamily: 'BebasNeue',
                       fontSize: 16,
@@ -192,7 +193,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
 
               // Play Button (Primary CTA)
               TangibleButton(
-                text: state.progress == null || state.progress!.currentLevel <= 1 ? 'Start Game' : 'Continue',
+                text: state.progress == null || state.progress!.currentLevel <= 1 ? AppStrings.t('start_game', state.language) : AppStrings.t('continue', state.language),
                 onPressed: state.isLoading
                     ? null
                     : () async {
@@ -209,7 +210,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
               const SizedBox(height: 12),
 
               TangibleButton(
-                text: 'Game Modes',
+                text: AppStrings.t('game_modes', state.language),
                 isSecondary: true,
                 onPressed: () => _showGameModesSheet(context),
               ),
@@ -217,7 +218,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
               const SizedBox(height: 12),
 
               TangibleButton(
-                text: 'Customization',
+                text: AppStrings.t('customization', state.language),
                 isSecondary: true,
                 onPressed: () => Navigator.push(
                   context,
@@ -231,7 +232,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
 
               // How to Play Button (Secondary Button)
               TangibleButton(
-                text: 'How to Play',
+                text: AppStrings.t('how_to_play', state.language),
                 isSecondary: true,
                 onPressed: () => Navigator.push(
                   context,
@@ -244,7 +245,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
               const SizedBox(height: 12),
 
               TangibleButton(
-                text: 'Settings',
+                text: AppStrings.t('settings', state.language),
                 isSecondary: true,
                 onPressed: () => Navigator.push(
                   context,
@@ -262,6 +263,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
   }
 
   void _showGameModesSheet(BuildContext context) {
+    final language = ref.read(homeViewModelProvider).language;
     showModalBottomSheet(
       context: context,
       backgroundColor: const Color(0xFF141418),
@@ -287,7 +289,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
                 ),
                 const SizedBox(height: 18),
                 Text(
-                  'GAME MODES',
+                  AppStrings.t('game_modes', language),
                   style: TextStyle(
                     fontFamily: 'BebasNeue',
                     fontSize: 24,
@@ -298,7 +300,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
                 ),
                 const SizedBox(height: 20),
                 TangibleButton(
-                  text: 'Select Level',
+                  text: AppStrings.t('select_level', language),
                   isSecondary: true,
                   onPressed: () {
                     Navigator.pop(sheetContext);
@@ -312,7 +314,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
                 ),
                 const SizedBox(height: 12),
                 TangibleButton(
-                  text: 'Random Puzzle',
+                  text: AppStrings.t('random_puzzle', language),
                   isSecondary: true,
                   onPressed: () {
                     Navigator.pop(sheetContext);
@@ -321,7 +323,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
                 ),
                 const SizedBox(height: 12),
                 TangibleButton(
-                  text: 'Multiplayer',
+                  text: AppStrings.t('multiplayer', language),
                   isSecondary: true,
                   onPressed: () {
                     Navigator.pop(sheetContext);
