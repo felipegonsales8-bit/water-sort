@@ -121,21 +121,22 @@ class AppColors {
     _waterColors = List.of(colors);
   }
 
+  // Arcane symbols used as potion sigils inside the glass tubes.
   static const List<IconData> waterIcons = [
-    Icons.favorite_rounded,
+    Icons.science_rounded,
+    Icons.auto_awesome_rounded,
+    Icons.diamond_rounded,
     Icons.water_drop_rounded,
+    Icons.flare_rounded,
+    Icons.dark_mode_rounded,
+    Icons.cloud_rounded,
+    Icons.local_fire_department_rounded,
     Icons.eco_rounded,
+    Icons.bolt_rounded,
+    Icons.ac_unit_rounded,
     Icons.wb_sunny_rounded,
     Icons.star_rounded,
-    Icons.dark_mode_rounded,
-    Icons.auto_awesome_rounded,
-    Icons.ac_unit_rounded,
-    Icons.palette_rounded,
-    Icons.whatshot_rounded,
-    Icons.cloud_rounded,
-    Icons.diamond_rounded,
-    Icons.cookie_rounded,
-    Icons.bolt_rounded,
+    Icons.bubble_chart_rounded,
     Icons.nightlight_rounded,
     Icons.grass_rounded,
   ];
