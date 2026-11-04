@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:watersort/ui/core/theme/app_colors.dart';
+import 'package:watersort/app_strings.dart';
 import 'package:watersort/ui/features/game/views/game_view.dart';
 import 'package:watersort/ui/providers.dart';
 
@@ -59,7 +60,7 @@ class _LevelSelectViewState extends ConsumerState<LevelSelectView> {
                   Expanded(
                     child: Center(
                       child: Text(
-                        'Levels',
+                        AppStrings.t('levels', state.language),
                         style: TextStyle(
                           fontFamily: 'BebasNeue',
                           fontSize: 28,
