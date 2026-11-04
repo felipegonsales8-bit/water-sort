@@ -27,6 +27,7 @@ class HomeViewModelState {
     this.tubeSize = 'medium',
     this.levelStars = const {},
     this.activeTheme = ThemePack.alchemy,
+    this.language = 'pt',
     this.areThemesUnlocked = false,
     this.customBackgroundImagePath,
     this.customWaterColors = AppColors.defaultWaterColors,
@@ -48,6 +49,7 @@ class HomeViewModelState {
   final String tubeSize;
   final Map<dynamic, dynamic> levelStars;
   final ThemePack activeTheme;
+  final String language;
   final bool areThemesUnlocked;
   final String? customBackgroundImagePath;
   final List<Color> customWaterColors;
@@ -69,6 +71,7 @@ class HomeViewModelState {
     String? tubeSize,
     Map<dynamic, dynamic>? levelStars,
     ThemePack? activeTheme,
+    String? language,
     bool? areThemesUnlocked,
     String? Function()? customBackgroundImagePath,
     List<Color>? customWaterColors,
@@ -95,6 +98,7 @@ class HomeViewModelState {
       tubeSize: tubeSize ?? this.tubeSize,
       levelStars: levelStars ?? this.levelStars,
       activeTheme: activeTheme ?? this.activeTheme,
+      language: language ?? this.language,
       areThemesUnlocked: areThemesUnlocked ?? this.areThemesUnlocked,
       customBackgroundImagePath: customBackgroundImagePath != null
           ? customBackgroundImagePath()
@@ -144,6 +148,7 @@ class HomeViewModel extends StateNotifier<HomeViewModelState> {
       final tubeSize = _progressRepository.getTubeSize();
       final levelStars = _progressRepository.getAllLevelStars();
       final themeName = _progressRepository.getThemePack();
+      final language = _progressRepository.getAppLanguage();
       final areThemesUnlocked = _progressRepository.areThemesUnlocked();
       final customBgPath = _progressRepository.getCustomBackgroundImagePath();
       final theme = ThemePack.values.firstWhere(
@@ -170,6 +175,7 @@ class HomeViewModel extends StateNotifier<HomeViewModelState> {
         tubeSize: tubeSize,
         levelStars: levelStars,
         activeTheme: theme,
+        language: language,
         areThemesUnlocked: areThemesUnlocked,
         customBackgroundImagePath: () => customBgPath,
         customWaterColors: waterColors,
@@ -265,6 +271,12 @@ class HomeViewModel extends StateNotifier<HomeViewModelState> {
   Future<void> setTubeSize(String size) async {
     await _progressRepository.setTubeSize(size);
     state = state.copyWith(tubeSize: size);
+  }
+
+  Future<void> setLanguage(String language) async {
+    if (!['pt', 'en', 'es'].contains(language)) return;
+    await _progressRepository.setAppLanguage(language);
+    state = state.copyWith(language: language);
   }
 
   Future<void> setThemePack(ThemePack theme) async {
