@@ -8,6 +8,8 @@ import 'package:flame_audio/flame_audio.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:watersort/ui/core/theme/app_colors.dart';
+import 'package:watersort/app_strings.dart';
+import 'package:watersort/ads/ad_service.dart';
 import 'package:watersort/ui/core/widgets/tangible_button.dart';
 import 'package:watersort/ui/features/game/view_models/game_view_model.dart';
 import 'package:watersort/ui/providers.dart';
@@ -77,6 +79,7 @@ class _GameViewState extends ConsumerState<GameView> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(gameViewModelProvider);
+    final language = ref.watch(homeViewModelProvider).language;
     if (state.level != null) {
       if (_game == null) {
         _game = WaterSortGame(
@@ -341,7 +344,7 @@ class _GameViewState extends ConsumerState<GameView> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'MOVES',
+                  AppStrings.t('moves', language),
                   style: TextStyle(
                     fontFamily: 'BebasNeue',
                     fontSize: 13,
@@ -395,8 +398,8 @@ class _GameViewState extends ConsumerState<GameView> {
                             if (!mounted) return;
                             setState(() {
                               _solvabilityTooltipMessage = isSolvable
-                                  ? 'Level is solvable'
-                                  : 'Level is not solvable';
+                                  ? AppStrings.t('solvable', language)
+                                  : AppStrings.t('not_solvable', language);
                             });
                             WidgetsBinding.instance.addPostFrameCallback((_) {
                               if (mounted) {
@@ -428,7 +431,7 @@ class _GameViewState extends ConsumerState<GameView> {
                             ),
                           const SizedBox(width: 6),
                           const Text(
-                            'CHECK',
+                            AppStrings.t('check', language),
                             style: TextStyle(
                               fontFamily: 'BebasNeue',
                               fontSize: 15,
@@ -447,21 +450,7 @@ class _GameViewState extends ConsumerState<GameView> {
                   onTap: state.isSolving
                       ? null
                       : () async {
-                          final success = await ref
-                              .read(gameViewModelProvider.notifier)
-                              .showHint();
-                          if (!mounted) return;
-                          if (!success) {
-                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text(
-                                  'No solution possible from current state. Try undoing some moves!',
-                                ),
-                                duration: Duration(seconds: 2),
-                              ),
-                            );
-                          }
+                          await _handleRewardedHint();
                         },
                   behavior: HitTestBehavior.opaque,
                   child: Padding(
@@ -486,7 +475,7 @@ class _GameViewState extends ConsumerState<GameView> {
                           ),
                         const SizedBox(width: 6),
                         const Text(
-                          'HINT',
+                          AppStrings.t('hint', language),
                           style: TextStyle(
                             fontFamily: 'BebasNeue',
                             fontSize: 15,
@@ -512,8 +501,36 @@ class _GameViewState extends ConsumerState<GameView> {
     return _game != null ? GameWidget(game: _game!) : const SizedBox.shrink();
   }
 
+  Future<void> _handleRewardedHint() async {
+    final language = ref.read(homeViewModelProvider).language;
+    if (!AdService.instance.isRewardedReady) {
+      AdService.instance.loadRewarded();
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppStrings.t('no_hint_ad', language))),
+      );
+      return;
+    }
+
+    final earned = await AdService.instance.showRewarded();
+    if (!mounted) return;
+    if (!earned) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppStrings.t('hint_not_earned', language))),
+      );
+      return;
+    }
+
+    final success = await ref.read(gameViewModelProvider.notifier).showHint();
+    if (!mounted || success) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(AppStrings.t('no_solution', language))),
+    );
+  }
+
   void _showCompleteDialog() {
     final state = ref.read(gameViewModelProvider);
+    final language = ref.read(homeViewModelProvider).language;
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -548,7 +565,7 @@ class _GameViewState extends ConsumerState<GameView> {
               ),
               const SizedBox(height: 20),
               Text(
-                'LEVEL COMPLETE!',
+                AppStrings.t('level_complete', language),
                 style: TextStyle(
                   fontFamily: 'BebasNeue',
                   fontSize: 28,
@@ -576,7 +593,7 @@ class _GameViewState extends ConsumerState<GameView> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   TangibleButton(
-                    text: state.isRandomMode ? 'Play Again' : 'Next Level',
+                    text: state.isRandomMode ? AppStrings.t('play_again', language) : AppStrings.t('next_level', language),
                     height: 50,
                     onPressed: () async {
                       final notifier = ref.read(gameViewModelProvider.notifier);
@@ -584,6 +601,8 @@ class _GameViewState extends ConsumerState<GameView> {
                       if (!mounted) return;
                       if (context.mounted) {
                         Navigator.pop(context);
+                        await AdService.instance.showInterstitialIfDue();
+                        if (!mounted) return;
                         if (state.isRandomMode) {
                           notifier.loadRandomLevel(
                             state.randomDifficulty ?? 'Easy',
@@ -604,7 +623,7 @@ class _GameViewState extends ConsumerState<GameView> {
                   ),
                   const SizedBox(height: 12),
                   TangibleButton(
-                    text: 'Home',
+                    text: AppStrings.t('home', language),
                     isSecondary: true,
                     height: 50,
                     onPressed: () async {
