@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:watersort/ui/core/theme/app_colors.dart';
+import 'package:watersort/app_strings.dart';
 import 'package:watersort/ui/providers.dart';
 
 class CustomizationView extends ConsumerWidget {
@@ -178,7 +179,7 @@ class CustomizationView extends ConsumerWidget {
                 children: [
                   _buildSectionHeader(
                     icon: Icons.palette_rounded,
-                    title: 'THEME PALETTES',
+                    title: AppStrings.t('theme_palettes', state.language),
                     trailing: Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 10,
@@ -273,7 +274,7 @@ class CustomizationView extends ConsumerWidget {
                   ),
                   _buildSectionHeader(
                     icon: Icons.water_drop_rounded,
-                    title: 'CUSTOMIZE LIQUID COLORS',
+                    title: AppStrings.t('customize_liquid_colors', state.language),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -376,14 +377,14 @@ class CustomizationView extends ConsumerWidget {
                   _buildLiquidColorsGrid(context, ref, state.customWaterColors),
                   _buildSectionHeader(
                     icon: Icons.auto_awesome_rounded,
-                    title: 'VISUALS',
+                    title: AppStrings.t('visuals', state.language),
                   ),
                   _buildCardGroup(
                     children: [
                       _buildSettingRow(
                         icon: Icons.blur_on_rounded,
                         iconColor: const Color(0xFF2DD4BF),
-                        title: 'FROST SOLVED TUBES',
+                        title: AppStrings.t('frost_solved_tubes', state.language),
                         description:
                             'Apply an icy glass frosting effect to completed tubes to easily focus on active ones.',
                         value: state.isBlurSolvedTubesEnabled,
