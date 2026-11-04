@@ -344,6 +344,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
   }
 
   void _showDifficultyDialog(BuildContext context) {
+    final language = ref.read(homeViewModelProvider).language;
     showDialog(
       context: context,
       builder: (context) {
@@ -396,7 +397,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'TUBE CAPACITY',
+                            AppStrings.t('tube_capacity', language),
                             style: TextStyle(
                               fontFamily: 'BebasNeue',
                               fontSize: 16,
@@ -430,7 +431,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
                       ),
                       const SizedBox(height: 24),
                       TangibleButton(
-                        text: 'PLAY PUZZLE',
+                        text: AppStrings.t('play_puzzle', language),
                         onPressed: () {
                           Navigator.pop(context);
                           Navigator.push(
@@ -450,7 +451,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
                       TextButton(
                         onPressed: () => Navigator.pop(context),
                         child: Text(
-                          'CANCEL',
+                          AppStrings.t('cancel', language),
                           style: TextStyle(
                             fontFamily: 'BebasNeue',
                             color: AppColors.subtext,
