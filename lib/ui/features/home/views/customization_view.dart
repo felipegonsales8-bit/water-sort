@@ -149,7 +149,7 @@ class CustomizationView extends ConsumerWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        'CUSTOMIZATION',
+                        AppStrings.t('customization', state.language),
                         style: TextStyle(
                           fontFamily: 'BebasNeue',
                           fontSize: 26,
