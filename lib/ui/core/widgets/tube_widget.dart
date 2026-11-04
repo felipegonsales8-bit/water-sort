@@ -89,7 +89,7 @@ class _TubeWidgetState extends State<TubeWidget> with SingleTickerProviderStateM
                   top: Radius.circular(topRadius),
                 ),
                 border: Border.all(
-                  color: widget.isSelected ? accentColor : const Color(0xFF2D2D35),
+                  color: widget.isSelected ? accentColor : accentColor.withValues(alpha: 0.32),
                   width: widget.isSelected ? 2.4 : borderWidth,
                 ),
                 boxShadow: [
@@ -235,10 +235,10 @@ class _TubeWidgetState extends State<TubeWidget> with SingleTickerProviderStateM
                     height: 5,
                     child: Container(
                       decoration: BoxDecoration(
-                        color: const Color(0xFF1E1E26),
+                        color: const Color(0xFF211727),
                         borderRadius: BorderRadius.circular(2.5),
                         border: Border.all(
-                          color: widget.isSelected ? accentColor : const Color(0xFF33333C),
+                          color: widget.isSelected ? accentColor : accentColor.withValues(alpha: 0.55),
                           width: 1.0,
                         ),
                       ),
