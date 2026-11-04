@@ -36,7 +36,16 @@ class _HomeViewState extends ConsumerState<HomeView> {
 
     return Scaffold(
       backgroundColor: isDark ? AppColors.darkBg : AppColors.lightBg,
-      body: SafeArea(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: RadialGradient(
+            center: Alignment(0, -0.55),
+            radius: 1.25,
+            colors: [Color(0xFF382344), Color(0xFF17111F), Color(0xFF090A10)],
+            stops: [0.0, 0.58, 1.0],
+          ),
+        ),
+        child: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
           child: Column(
@@ -248,7 +257,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
             ],
           ),
         ),
-      ),
+      )),
     );
   }
 
