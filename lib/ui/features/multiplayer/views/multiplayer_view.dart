@@ -1,18 +1,21 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:watersort/app_strings.dart';
+import 'package:watersort/ui/providers.dart';
 import 'package:flutter/services.dart';
 import 'package:watersort/ui/core/theme/app_colors.dart';
 import 'package:watersort/ui/core/widgets/tangible_button.dart';
 import 'package:watersort/ui/features/game/views/game_view.dart';
 
-class MultiplayerView extends StatefulWidget {
+class MultiplayerView extends ConsumerStatefulWidget {
   const MultiplayerView({super.key});
 
   @override
-  State<MultiplayerView> createState() => _MultiplayerViewState();
+  ConsumerState<MultiplayerView> createState() => _MultiplayerViewState();
 }
 
-class _MultiplayerViewState extends State<MultiplayerView> {
+class _MultiplayerViewState extends ConsumerState<MultiplayerView> {
   static const _difficulties = [
     {'label': 'EASY', 'value': 'Easy', 'cap': 4},
     {'label': 'MEDIUM', 'value': 'Medium', 'cap': 4},
@@ -93,6 +96,7 @@ class _MultiplayerViewState extends State<MultiplayerView> {
   Widget build(BuildContext context) {
     final code = _encodeRoom(_selectedDifficulty, _seed);
 
+    final language = ref.watch(homeViewModelProvider).language;
     return Scaffold(
       backgroundColor: AppColors.bg,
       body: SafeArea(
@@ -123,7 +127,7 @@ class _MultiplayerViewState extends State<MultiplayerView> {
                   ),
                   const SizedBox(width: 16),
                   Text(
-                    'MULTIPLAYER',
+                    AppStrings.t('multiplayer', language),
                     style: TextStyle(
                       fontFamily: 'BebasNeue',
                       fontSize: 28,
@@ -142,7 +146,7 @@ class _MultiplayerViewState extends State<MultiplayerView> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      'CREATE ROOM',
+                      AppStrings.t('create_room', language),
                       style: TextStyle(
                         fontFamily: 'BebasNeue',
                         fontSize: 18,
@@ -195,7 +199,7 @@ class _MultiplayerViewState extends State<MultiplayerView> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'ROOM CODE',
+                                  AppStrings.t('room_code', language),
                                   style: TextStyle(
                                     fontFamily: 'BebasNeue',
                                     fontSize: 12,
@@ -226,7 +230,7 @@ class _MultiplayerViewState extends State<MultiplayerView> {
                               Clipboard.setData(ClipboardData(text: code));
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                  content: Text('Room code copied to clipboard'),
+                                  content: Text(AppStrings.t('room_code_copied', language)),
                                   duration: Duration(seconds: 2),
                                 ),
                               );
@@ -237,14 +241,14 @@ class _MultiplayerViewState extends State<MultiplayerView> {
                     ),
                     const SizedBox(height: 14),
                     TangibleButton(
-                      text: 'PLAY THIS PUZZLE',
+                      text: AppStrings.t('play_this_puzzle', language),
                       onPressed: () => _launchGame(_selectedDifficulty, _seed),
                     ),
                     const SizedBox(height: 28),
                     Divider(color: const Color(0xFF262626)),
                     const SizedBox(height: 20),
                     Text(
-                      'JOIN ROOM',
+                      AppStrings.t('join_room', language),
                       style: TextStyle(
                         fontFamily: 'BebasNeue',
                         fontSize: 18,
@@ -262,7 +266,7 @@ class _MultiplayerViewState extends State<MultiplayerView> {
                         letterSpacing: 1.5,
                       ),
                       decoration: InputDecoration(
-                        hintText: 'ENTER CODE (E.G. $code)',
+                        hintText: AppStrings.t('enter_room_code', language),
                         hintStyle: TextStyle(
                           fontFamily: 'BebasNeue',
                           color: AppColors.subtext.withOpacity(0.5),
@@ -296,14 +300,14 @@ class _MultiplayerViewState extends State<MultiplayerView> {
                     ),
                     const SizedBox(height: 14),
                     TangibleButton(
-                      text: 'JOIN PUZZLE',
+                      text: AppStrings.t('join_puzzle', language),
                       isSecondary: true,
                       onPressed: () {
                         final decoded = _decodeRoom(_codeController.text);
                         if (decoded == null) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              content: Text('Invalid room code. Please check and try again.'),
+                              content: Text(AppStrings.t('invalid_room_code', language)),
                               duration: Duration(seconds: 2),
                             ),
                           );
