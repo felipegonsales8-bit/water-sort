@@ -56,8 +56,8 @@ class AppColors {
     }
   }
 
-  static Color get headingWhite => const Color(0xFFFFFFFF);
-  static Color get subtext => const Color(0xFF808080);
+  static Color get headingWhite => const Color(0xFFFFF4D8);
+  static Color get subtext => const Color(0xFFB9A98C);
 
   static Color get bg {
     switch (_activeTheme) {
@@ -82,16 +82,16 @@ class AppColors {
     }
   }
 
-  static Color get gridLines => const Color(0xFF222222);
+  static Color get gridLines => const Color(0xFF493A2D);
 
   static Color get darkBg => bg;
-  static Color get darkSurface => const Color(0xFF16161C);
-  static Color get darkCard => const Color(0xFF1C1C22);
+  static Color get darkSurface => const Color(0xFF211927);
+  static Color get darkCard => const Color(0xFF2A2030);
   static Color get darkBorder => accent;
 
   static Color get lightBg => bg;
-  static Color get lightSurface => const Color(0xFF16161C);
-  static Color get lightCard => const Color(0xFF1C1C22);
+  static Color get lightSurface => const Color(0xFF211927);
+  static Color get lightCard => const Color(0xFF2A2030);
   static Color get lightBorder => accent;
 
   static const List<Color> defaultWaterColors = [
