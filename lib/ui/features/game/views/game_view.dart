@@ -133,7 +133,13 @@ class _GameViewState extends ConsumerState<GameView> {
                   ),
                 ),
               )
-            : null,
+            : BoxDecoration(
+                gradient: const LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Color(0xFF211729), Color(0xFF120F19), Color(0xFF090A10)],
+                ),
+              ),
         child: SafeArea(
           child: Column(
             children: [
@@ -145,10 +151,10 @@ class _GameViewState extends ConsumerState<GameView> {
                   vertical: 8,
                 ),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF1E1E24).withValues(alpha: 0.8),
+                  color: const Color(0xFF281F30).withValues(alpha: 0.94),
                   borderRadius: BorderRadius.circular(24),
                   border: Border.all(
-                    color: const Color(0xFF2E2E3A),
+                    color: AppColors.accent.withValues(alpha: 0.48),
                     width: 1.2,
                   ),
                 ),
