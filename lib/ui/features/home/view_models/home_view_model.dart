@@ -20,7 +20,7 @@ class HomeViewModelState {
     this.isSuperHardModeEnabled = false,
     this.isBlurSolvedTubesEnabled = false,
     this.isInstantPouringEnabled = false,
-    this.isHintHelperEnabled = false,
+    this.isHintHelperEnabled = true,
     this.isCheckButtonEnabled = false,
     this.isUndoDecrementsMovesEnabled = false,
     this.isSoundEffectsEnabled = true,
