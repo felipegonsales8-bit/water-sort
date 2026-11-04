@@ -18,12 +18,13 @@ enum ThemePack {
   monochrome,
   aquamarine,
   solar,
+  alchemy,
 }
 
 class AppColors {
   AppColors._();
 
-  static ThemePack _activeTheme = ThemePack.midnight;
+  static ThemePack _activeTheme = ThemePack.alchemy;
 
   static ThemePack get activeTheme => _activeTheme;
 
@@ -51,6 +52,7 @@ class AppColors {
       case ThemePack.monochrome: return const Color(0xFFE0E0E0);
       case ThemePack.aquamarine: return const Color(0xFF7FFFD4);
       case ThemePack.solar: return const Color(0xFFFFCC00);
+      case ThemePack.alchemy: return const Color(0xFFC69A4A);
     }
   }
 
@@ -76,6 +78,7 @@ class AppColors {
       case ThemePack.monochrome: return const Color(0xFF1A1A1A);
       case ThemePack.aquamarine: return const Color(0xFF081C15);
       case ThemePack.solar: return const Color(0xFF200F00);
+      case ThemePack.alchemy: return const Color(0xFF17111F);
     }
   }
 
