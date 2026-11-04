@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:watersort/ads/ad_service.dart';
 
 import 'package:watersort/data/services/hive_service.dart';
 import 'package:watersort/ui/core/theme/app_theme.dart';
@@ -13,6 +14,7 @@ void main() async {
 
   // Inicializa o SDK de anúncios; o manifesto ainda usa o App ID oficial de teste.
   await MobileAds.instance.initialize();
+  AdService.instance.loadRewarded();
 
   final hiveService = HiveService();
   await hiveService.init();
