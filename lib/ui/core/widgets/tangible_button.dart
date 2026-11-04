@@ -26,7 +26,7 @@ class _TangibleButtonState extends State<TangibleButton> {
   @override
   Widget build(BuildContext context) {
     final themeColor = widget.isSecondary
-        ? const Color(0xFF808080)
+        ? const Color(0xFF9B835D)
         : AppColors.accent;
     final isInteractive = widget.onPressed != null;
     final isActive = (_isHovered || _isPressed) && isInteractive;
@@ -34,7 +34,7 @@ class _TangibleButtonState extends State<TangibleButton> {
     // Asymmetric, semi-transparent background color (off-black)
     final buttonBg = isActive
         ? themeColor
-        : const Color(0xFF18181E).withOpacity(0.85);
+        : const Color(0xFF241B2B).withOpacity(0.94);
 
     final textColor = isActive
         ? const Color(0xFF121212) // Black text when active/hovered
@@ -70,10 +70,10 @@ class _TangibleButtonState extends State<TangibleButton> {
           width: double.infinity,
           decoration: BoxDecoration(
             color: buttonBg,
-            borderRadius: BorderRadius.circular(8), // border-radius: 8px
+            borderRadius: BorderRadius.circular(14),
             border: Border.all(
               color: themeColor,
-              width: 1.0, // 1px solid
+              width: widget.isSecondary ? 0.8 : 1.4,
             ),
             boxShadow: [
               if (show3DShadow)
