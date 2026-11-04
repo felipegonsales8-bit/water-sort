@@ -232,7 +232,7 @@ class HiveService {
 
   String getThemePack() {
     final profileId = _getActiveProfileIdSync();
-    return _settingsBox.get('${profileId}_theme_pack')?.toString() ?? 'midnight';
+    return _settingsBox.get('${profileId}_theme_pack')?.toString() ?? 'alchemy';
   }
 
   Future<void> setThemePack(String themeName) async {
