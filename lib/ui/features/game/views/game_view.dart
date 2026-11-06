@@ -79,7 +79,6 @@ class _GameViewState extends ConsumerState<GameView> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(gameViewModelProvider);
-    final language = ref.watch(homeViewModelProvider).language;
     if (state.level != null) {
       if (_game == null) {
         _game = WaterSortGame(
@@ -286,6 +285,7 @@ class _GameViewState extends ConsumerState<GameView> {
   }
 
   Widget _buildBottomBar(GameViewModelState state) {
+    final language = ref.read(homeViewModelProvider).language;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Container(
@@ -430,7 +430,7 @@ class _GameViewState extends ConsumerState<GameView> {
                               color: Color(0xFF00E676),
                             ),
                           const SizedBox(width: 6),
-                          const Text(
+                          Text(
                             AppStrings.t('check', language),
                             style: TextStyle(
                               fontFamily: 'BebasNeue',
@@ -474,7 +474,7 @@ class _GameViewState extends ConsumerState<GameView> {
                             color: Color(0xFFFFB300),
                           ),
                         const SizedBox(width: 6),
-                        const Text(
+                        Text(
                           AppStrings.t('hint', language),
                           style: TextStyle(
                             fontFamily: 'BebasNeue',
