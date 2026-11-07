@@ -15,7 +15,7 @@ void main() {
     });
 
     test('unknown language falls back to English', () {
-      expect(AppStrings.t('hint', 'fr'), 'HINT');
+      expect(AppStrings.t('hint', 'fr'), 'HINT • AD');
     });
   });
 }
