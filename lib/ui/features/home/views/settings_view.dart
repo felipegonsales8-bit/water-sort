@@ -133,7 +133,7 @@ class SettingsView extends ConsumerWidget {
               ),
               const SizedBox(height: 18),
               Text(
-                'RESET PROGRESS?',
+                AppStrings.t('reset_progress_title', ref.read(homeViewModelProvider).language),
                 style: TextStyle(
                   fontFamily: 'BebasNeue',
                   fontSize: 24,
@@ -144,7 +144,7 @@ class SettingsView extends ConsumerWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                'This will erase all completed levels, stars, and saved state for this profile. This action cannot be undone.',
+                AppStrings.t('reset_progress_body', ref.read(homeViewModelProvider).language),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 13,
@@ -166,7 +166,7 @@ class SettingsView extends ConsumerWidget {
                       ),
                       onPressed: () => Navigator.pop(dialogContext),
                       child: Text(
-                        'CANCEL',
+                        AppStrings.t('cancel', state.language),
                         style: TextStyle(
                           fontFamily: 'BebasNeue',
                           fontSize: 15,
@@ -196,14 +196,14 @@ class SettingsView extends ConsumerWidget {
                         if (context.mounted) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              content: Text('Progress has been reset.'),
+                              content: Text(AppStrings.t('progress_reset', ref.read(homeViewModelProvider).language)),
                               duration: Duration(seconds: 2),
                             ),
                           );
                         }
                       },
                       child: const Text(
-                        'RESET',
+                        AppStrings.t('reset', state.language),
                         style: TextStyle(
                           fontFamily: 'BebasNeue',
                           fontSize: 15,
@@ -356,7 +356,7 @@ class SettingsView extends ConsumerWidget {
                         iconColor: const Color(0xFF38BDF8),
                         title: AppStrings.t('gameplay_timer', state.language),
                         description:
-                            'Add countdown timer to levels for an extra challenge, or keep it off to play relaxed.',
+                            AppStrings.t('timer_description', state.language),
                         value: state.isTimerEnabled,
                         onTap: () => ref
                             .read(homeViewModelProvider.notifier)
@@ -381,7 +381,7 @@ class SettingsView extends ConsumerWidget {
                           iconColor: const Color(0xFF10B981),
                           title: AppStrings.t('check_button', state.language),
                           description:
-                              'Replace the hint button with a check button that tells if the level is solvable via tooltip without giving hints.',
+                              AppStrings.t('check_description', state.language),
                           value: state.isCheckButtonEnabled,
                           onTap: () => ref
                               .read(homeViewModelProvider.notifier)
@@ -392,9 +392,9 @@ class SettingsView extends ConsumerWidget {
                       _buildSettingRow(
                         icon: Icons.visibility_off_rounded,
                         iconColor: const Color(0xFFA855F7),
-                        title: 'SUPER HARD DIFFICULTY',
+                        title: AppStrings.t('super_hard', state.language),
                         description:
-                            'Only reveal the topmost color; all hidden liquid segments beneath are pure white.',
+                            AppStrings.t('super_hard_description', state.language),
                         value: state.isSuperHardModeEnabled,
                         onTap: () => ref
                             .read(homeViewModelProvider.notifier)
@@ -404,9 +404,9 @@ class SettingsView extends ConsumerWidget {
                       _buildSettingRow(
                         icon: Icons.undo_rounded,
                         iconColor: const Color(0xFFF43F5E),
-                        title: 'DECREMENT MOVES ON UNDO',
+                        title: AppStrings.t('undo_decrement', state.language),
                         description:
-                            'Decrease the move counter when undoing a move.',
+                            AppStrings.t('undo_decrement_description', state.language),
                         value: state.isUndoDecrementsMovesEnabled,
                         onTap: () => ref
                             .read(homeViewModelProvider.notifier)
@@ -427,7 +427,7 @@ class SettingsView extends ConsumerWidget {
                         iconColor: const Color(0xFF34D399),
                         title: AppStrings.t('sound_effects', state.language),
                         description:
-                            'Liquid pouring sounds, tube completion chimes, and victory fanfare.',
+                            AppStrings.t('sound_description', state.language),
                         value: state.isSoundEffectsEnabled,
                         isEnabled: !state.isInstantPouringEnabled,
                         onTap: () => ref
@@ -438,9 +438,9 @@ class SettingsView extends ConsumerWidget {
                       _buildSettingRow(
                         icon: Icons.motion_photos_off_rounded,
                         iconColor: const Color(0xFFF87171),
-                        title: 'TURN OFF ANIMATIONS',
+                        title: AppStrings.t('turn_off_animations', state.language),
                         description:
-                            'Instant gameplay mode. Disables pouring physics, ripples, waves, and all sound effects.',
+                            AppStrings.t('turn_off_animations_description', state.language),
                         value: state.isInstantPouringEnabled,
                         onTap: () => ref
                             .read(homeViewModelProvider.notifier)
@@ -450,15 +450,15 @@ class SettingsView extends ConsumerWidget {
                   ),
                   _buildSectionHeader(
                     icon: Icons.backup_rounded,
-                    title: 'BACKUP & RESTORE',
+                    title: AppStrings.t('backup_restore', state.language),
                   ),
                   _buildCardGroup(
                     children: [
                       _buildActionRow(
                         icon: Icons.file_upload_rounded,
                         iconColor: const Color(0xFF38BDF8),
-                        title: 'EXPORT BACKUP',
-                        description: 'Save your progress',
+                        title: AppStrings.t('export_backup', state.language),
+                        description: AppStrings.t('save_progress', state.language),
                         onTap: () => _exportBackup(context, ref),
                         trailing: const Icon(
                           Icons.arrow_forward_ios_rounded,
@@ -470,8 +470,8 @@ class SettingsView extends ConsumerWidget {
                       _buildActionRow(
                         icon: Icons.file_download_rounded,
                         iconColor: const Color(0xFF10B981),
-                        title: 'IMPORT BACKUP',
-                        description: 'Restore your progress',
+                        title: AppStrings.t('import_backup', state.language),
+                        description: AppStrings.t('restore_progress', state.language),
                         onTap: () => _importBackup(context, ref),
                         trailing: const Icon(
                           Icons.arrow_forward_ios_rounded,
@@ -483,16 +483,16 @@ class SettingsView extends ConsumerWidget {
                   ),
                   _buildSectionHeader(
                     icon: Icons.help_outline_rounded,
-                    title: 'SUPPORT & ABOUT',
+                    title: AppStrings.t('support_about', state.language),
                   ),
                   _buildCardGroup(
                     children: [
                       _buildActionRow(
                         icon: Icons.bug_report_rounded,
                         iconColor: const Color(0xFFEF4444),
-                        title: 'REPORT BUGS / SUGGESTIONS',
+                        title: AppStrings.t('report_bugs', state.language),
                         description:
-                            'Open GitHub to submit bug reports or propose new features.',
+                            AppStrings.t('report_bugs_description', state.language),
                         onTap: () => _launchExternalUrl(
                           'https://github.com/sidhant947/water-sort',
                         ),
@@ -506,9 +506,9 @@ class SettingsView extends ConsumerWidget {
                       _buildActionRow(
                         icon: Icons.coffee_rounded,
                         iconColor: const Color(0xFFF59E0B),
-                        title: 'BUY ME A COFFEE',
+                        title: AppStrings.t('buy_coffee', state.language),
                         description:
-                            'Support independent development and future game updates.',
+                            AppStrings.t('buy_coffee_description', state.language),
                         onTap: () =>
                             _launchExternalUrl('https://ko-fi.com/sidhant947'),
                         trailing: const Icon(
@@ -521,9 +521,9 @@ class SettingsView extends ConsumerWidget {
                       _buildActionRow(
                         icon: Icons.restart_alt_rounded,
                         iconColor: Colors.redAccent,
-                        title: 'RESET ALL PROGRESS',
+                        title: AppStrings.t('reset_all_progress', state.language),
                         description:
-                            'Clear all solved level records, stars, and saved states.',
+                            AppStrings.t('reset_all_progress_description', state.language),
                         onTap: () => _showResetConfirmationDialog(context, ref),
                         trailing: const Icon(
                           Icons.arrow_forward_ios_rounded,
