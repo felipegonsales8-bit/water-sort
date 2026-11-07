@@ -166,7 +166,7 @@ class SettingsView extends ConsumerWidget {
                       ),
                       onPressed: () => Navigator.pop(dialogContext),
                       child: Text(
-                        AppStrings.t('cancel', state.language),
+                        AppStrings.t('cancel', ref.read(homeViewModelProvider).language),
                         style: TextStyle(
                           fontFamily: 'BebasNeue',
                           fontSize: 15,
@@ -203,7 +203,7 @@ class SettingsView extends ConsumerWidget {
                         }
                       },
                       child: const Text(
-                        AppStrings.t('reset', state.language),
+                        AppStrings.t('reset', ref.read(homeViewModelProvider).language),
                         style: TextStyle(
                           fontFamily: 'BebasNeue',
                           fontSize: 15,
