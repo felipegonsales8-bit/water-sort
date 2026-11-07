@@ -79,6 +79,7 @@ class _GameViewState extends ConsumerState<GameView> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(gameViewModelProvider);
+    final language = ref.watch(homeViewModelProvider).language;
     if (state.level != null) {
       if (_game == null) {
         _game = WaterSortGame(
@@ -217,7 +218,9 @@ class _GameViewState extends ConsumerState<GameView> {
                                 )
                               : Text(
                                   key: const ValueKey('level'),
-                                  state.isRandomMode ? 'RANDOM' : 'LEVEL ${widget.levelNumber}',
+                                  state.isRandomMode
+                                      ? AppStrings.t('random_level', language)
+                                      : '${AppStrings.t('level', language)} ${widget.levelNumber}',
                                   style: TextStyle(
                                     fontFamily: 'BebasNeue',
                                     fontSize: 16,
@@ -269,7 +272,7 @@ class _GameViewState extends ConsumerState<GameView> {
                             onPressed: () => ref
                                 .read(gameViewModelProvider.notifier)
                                 .resetLevel(),
-                            child: const Text('Retry'),
+                            child: Text(AppStrings.t('retry', language)),
                           ),
                         ],
                       ),
@@ -325,7 +328,7 @@ class _GameViewState extends ConsumerState<GameView> {
                     ),
                     const SizedBox(width: 6),
                     Text(
-                      'UNDO',
+                      AppStrings.t('undo', language),
                       style: TextStyle(
                         fontFamily: 'BebasNeue',
                         fontSize: 15,
@@ -701,7 +704,7 @@ class _GameViewState extends ConsumerState<GameView> {
               ),
               const SizedBox(height: 20),
               Text(
-                "TIME'S UP!",
+                AppStrings.t('time_up', ref.read(homeViewModelProvider).language),
                 style: TextStyle(
                   fontFamily: 'BebasNeue',
                   fontSize: 28,
@@ -712,7 +715,7 @@ class _GameViewState extends ConsumerState<GameView> {
               ),
               const SizedBox(height: 8),
               Text(
-                "You ran out of time to sort the water colors.",
+                AppStrings.t('time_up_description', ref.read(homeViewModelProvider).language),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: 'BebasNeue',
@@ -727,7 +730,7 @@ class _GameViewState extends ConsumerState<GameView> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   TangibleButton(
-                    text: 'Try Again',
+                    text: AppStrings.t('try_again', ref.read(homeViewModelProvider).language),
                     height: 50,
                     onPressed: () {
                       Navigator.pop(context);
