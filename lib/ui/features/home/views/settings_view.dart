@@ -195,14 +195,14 @@ class SettingsView extends ConsumerWidget {
                             .resetProgress();
                         if (context.mounted) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
+                            SnackBar(
                               content: Text(AppStrings.t('progress_reset', ref.read(homeViewModelProvider).language)),
                               duration: Duration(seconds: 2),
                             ),
                           );
                         }
                       },
-                      child: const Text(
+                      child: Text(
                         AppStrings.t('reset', ref.read(homeViewModelProvider).language),
                         style: TextStyle(
                           fontFamily: 'BebasNeue',
