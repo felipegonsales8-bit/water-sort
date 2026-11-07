@@ -34,10 +34,14 @@ jobs:
         run: flutter test
       - name: Build debug APK
         run: flutter build apk --debug
-      - name: Upload test APK
+      - name: Build Android App Bundle (validation only)
+        run: flutter build appbundle --release
+      - name: Upload test APK and validation bundle
         uses: actions/upload-artifact@v4
         with:
-          name: potion-master-debug-apk
-          path: build/app/outputs/flutter-apk/app-debug.apk
+          name: potion-master-android-builds
+          path: |
+            build/app/outputs/flutter-apk/app-debug.apk
+            build/app/outputs/bundle/release/app-release.aab
           if-no-files-found: error
           retention-days: 7
