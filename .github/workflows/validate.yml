@@ -44,8 +44,8 @@ jobs:
           test -n "$ANDROID_KEYSTORE_PASSWORD"
           test -n "$ANDROID_KEY_ALIAS"
           test -n "$ANDROID_KEY_PASSWORD"
-          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > android/app/upload-keystore.jks
-          test -s android/app/upload-keystore.jks
+          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > android/upload-keystore.jks
+          test -s android/upload-keystore.jks
           {
             printf 'storePassword=%s\n' "$ANDROID_KEYSTORE_PASSWORD"
             printf 'keyPassword=%s\n' "$ANDROID_KEY_PASSWORD"
