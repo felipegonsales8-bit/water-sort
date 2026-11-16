@@ -10,7 +10,6 @@ import 'package:watersort/ui/features/level_select/views/level_select_view.dart'
 import 'package:watersort/ui/providers.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:watersort/domain/models/user_profile.dart';
-import 'package:watersort/ui/features/home/views/customization_view.dart';
 import 'package:watersort/ui/features/home/views/settings_view.dart';
 import 'package:watersort/ui/features/multiplayer/views/multiplayer_view.dart';
 
@@ -213,19 +212,6 @@ class _HomeViewState extends ConsumerState<HomeView> {
                 text: AppStrings.t('game_modes', state.language),
                 isSecondary: true,
                 onPressed: () => _showGameModesSheet(context),
-              ),
-
-              const SizedBox(height: 12),
-
-              TangibleButton(
-                text: AppStrings.t('customization', state.language),
-                isSecondary: true,
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const CustomizationView(),
-                  ),
-                ),
               ),
 
               const SizedBox(height: 12),
