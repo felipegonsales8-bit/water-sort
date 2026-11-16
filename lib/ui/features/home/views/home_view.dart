@@ -93,7 +93,6 @@ class _HomeViewState extends ConsumerState<HomeView> {
                     )
                   else
                     const SizedBox.shrink(),
-
                 ],
               ),
               const Spacer(flex: 3),
@@ -266,7 +265,8 @@ class _HomeViewState extends ConsumerState<HomeView> {
                       ),
                     );
                   },
-                ),                const SizedBox(height: 12),
+                ),
+                const SizedBox(height: 12),
                 TangibleButton(
                   text: AppStrings.t('random_puzzle', language),
                   isSecondary: true,
@@ -616,3 +616,231 @@ class _HomeViewState extends ConsumerState<HomeView> {
                     const SizedBox(height: 16),
                     TextField(
                       controller: nameController,
+                      style: const TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                        hintText: 'Enter profile name',
+                        hintStyle: const TextStyle(color: Color(0xFF666666)),
+                        filled: true,
+                        fillColor: const Color(0xFF1C1C22),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: const BorderSide(color: Color(0xFF2C2C35)),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color: AppColors.accent),
+                        ),
+                      ),
+                      onChanged: (_) => setState(() {}),
+                    ),
+                    const SizedBox(height: 16),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'SELECT AVATAR EMOJI',
+                        style: TextStyle(
+                          color: AppColors.subtext,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: emojis.map((emoji) {
+                        final isSelected = selectedEmoji == emoji;
+                        return GestureDetector(
+                          onTap: () => setState(() => selectedEmoji = emoji),
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: isSelected
+                                  ? AppColors.accent.withOpacity(0.12)
+                                  : const Color(0xFF1C1C22),
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: isSelected ? AppColors.accent : const Color(0xFF2C2C35),
+                                width: 1.5,
+                              ),
+                            ),
+                            child: Text(
+                              emoji,
+                              style: const TextStyle(fontSize: 20),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                    const SizedBox(height: 24),
+                    TangibleButton(
+                      text: 'CREATE',
+                      onPressed: nameController.text.trim().isEmpty
+                          ? null
+                          : () {
+                              ref.read(homeViewModelProvider.notifier).createProfile(
+                                    nameController.text.trim(),
+                                    selectedEmoji,
+                                  );
+                              Navigator.pop(context);
+                            },
+                    ),
+                    const SizedBox(height: 8),
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: Text(
+                        'CANCEL',
+                        style: TextStyle(
+                          fontFamily: 'BebasNeue',
+                          color: AppColors.subtext,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1.2,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void _showEditProfileDialog(BuildContext context, UserProfile profile) {
+    final nameController = TextEditingController(text: profile.name);
+    String selectedEmoji = profile.avatarEmoji;
+    final emojis = ['🧪', '🧬', '💧', '🎨', '🔮', '🌟', '🔥', '🏆', '👾', '🚀'];
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return Dialog(
+              backgroundColor: const Color(0xFF181818),
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+                side: const BorderSide(
+                  color: Color(0xFF222222),
+                  width: 1.0,
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'EDIT PROFILE',
+                      style: TextStyle(
+                        fontFamily: 'BebasNeue',
+                        fontSize: 26,
+                        fontWeight: FontWeight.w900,
+                        color: AppColors.headingWhite,
+                        letterSpacing: 1.0,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    TextField(
+                      controller: nameController,
+                      style: const TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                        hintText: 'Enter profile name',
+                        hintStyle: const TextStyle(color: Color(0xFF666666)),
+                        filled: true,
+                        fillColor: const Color(0xFF1C1C22),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: const BorderSide(color: Color(0xFF2C2C35)),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color: AppColors.accent),
+                        ),
+                      ),
+                      onChanged: (_) => setState(() {}),
+                    ),
+                    const SizedBox(height: 16),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'SELECT AVATAR EMOJI',
+                        style: TextStyle(
+                          color: AppColors.subtext,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: emojis.map((emoji) {
+                        final isSelected = selectedEmoji == emoji;
+                        return GestureDetector(
+                          onTap: () => setState(() => selectedEmoji = emoji),
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: isSelected
+                                  ? AppColors.accent.withOpacity(0.12)
+                                  : const Color(0xFF1C1C22),
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: isSelected ? AppColors.accent : const Color(0xFF2C2C35),
+                                width: 1.5,
+                              ),
+                            ),
+                            child: Text(
+                              emoji,
+                              style: const TextStyle(fontSize: 20),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                    const SizedBox(height: 24),
+                    TangibleButton(
+                      text: 'SAVE CHANGES',
+                      onPressed: nameController.text.trim().isEmpty
+                          ? null
+                          : () {
+                              final updated = profile.copyWith(
+                                name: nameController.text.trim(),
+                                avatarEmoji: selectedEmoji,
+                              );
+                              ref.read(homeViewModelProvider.notifier).updateProfile(updated);
+                              Navigator.pop(context);
+                            },
+                    ),
+                    const SizedBox(height: 8),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        _showProfileSwitcherDialog(context);
+                      },
+                      child: Text(
+                        'CANCEL',
+                        style: TextStyle(
+                          fontFamily: 'BebasNeue',
+                          color: AppColors.subtext,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1.2,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+}
