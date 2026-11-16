@@ -287,6 +287,7 @@ class _GameViewState extends ConsumerState<GameView> {
             _buildBottomBar(state),
               ],
             ),
+            ),
           ],
         ),
       ),
@@ -347,8 +348,7 @@ class _GameViewState extends ConsumerState<GameView> {
                     ),
                   ],
                 ),              ),
-            ),
-            Row(
+            ),            Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
@@ -697,8 +697,7 @@ class _GameViewState extends ConsumerState<GameView> {
                 style: TextStyle(
                   fontFamily: 'BebasNeue',                  fontSize: 28,
                   fontWeight: FontWeight.w900,
-                  color: AppColors.headingWhite,
-                  letterSpacing: 1.0,
+                  color: AppColors.headingWhite,                  letterSpacing: 1.0,
                 ),
               ),
               const SizedBox(height: 8),
