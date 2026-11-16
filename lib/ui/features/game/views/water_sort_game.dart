@@ -187,11 +187,8 @@ class WaterSortGame extends FlameGame with TapCallbacks, ScaleCallbacks {
 
   @override
   Color backgroundColor() {
-    if (_state.customBackgroundImagePath != null &&
-        File(_state.customBackgroundImagePath!).existsSync()) {
-      return Colors.transparent;
-    }
-    return AppColors.bg;
+    // Let the Flutter scene painter (or a user-selected image) show through.
+    return Colors.transparent;
   }
 
   @override
