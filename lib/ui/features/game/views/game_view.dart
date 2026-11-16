@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flame/game.dart';
 import 'package:flame_audio/flame_audio.dart';
 
-import 'package:url_launcher/url_launcher.dart';
 
 import 'package:watersort/ui/core/theme/app_colors.dart';
 import 'package:watersort/app_strings.dart';
@@ -347,8 +346,7 @@ class _GameViewState extends ConsumerState<GameView> {
                       ),
                     ),
                   ],
-                ),
-              ),
+                ),              ),
             ),
             Row(
               mainAxisSize: MainAxisSize.min,
@@ -697,8 +695,7 @@ class _GameViewState extends ConsumerState<GameView> {
               Text(
                 AppStrings.t('time_up', ref.read(homeViewModelProvider).language),
                 style: TextStyle(
-                  fontFamily: 'BebasNeue',
-                  fontSize: 28,
+                  fontFamily: 'BebasNeue',                  fontSize: 28,
                   fontWeight: FontWeight.w900,
                   color: AppColors.headingWhite,
                   letterSpacing: 1.0,
