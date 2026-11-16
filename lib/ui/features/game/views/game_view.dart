@@ -14,6 +14,7 @@ import 'package:watersort/ui/core/widgets/tangible_button.dart';
 import 'package:watersort/ui/features/game/view_models/game_view_model.dart';
 import 'package:watersort/ui/providers.dart';
 import 'package:watersort/ui/features/game/views/water_sort_game.dart';
+import 'package:watersort/ui/features/game/views/alchemy_dungeon_background.dart';
 
 class GameView extends ConsumerStatefulWidget {
   const GameView({
@@ -143,8 +144,13 @@ class _GameViewState extends ConsumerState<GameView> {
                   colors: [Color(0xFF211729), Color(0xFF120F19), Color(0xFF090A10)],
                 ),
               ),
-        child: SafeArea(
-          child: Column(
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            if (!hasCustomBg)
+              CustomPaint(painter: AlchemyDungeonBackground(level: widget.levelNumber)),
+            SafeArea(
+              child: Column(
             children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -280,8 +286,9 @@ class _GameViewState extends ConsumerState<GameView> {
                   : _buildGame(state),
             ),
             _buildBottomBar(state),
-            ],
-          ),
+              ],
+            ),
+          ],
         ),
       ),
     );
@@ -347,8 +354,7 @@ class _GameViewState extends ConsumerState<GameView> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  AppStrings.t('moves', language),
-                  style: TextStyle(
+                  AppStrings.t('moves', language),                  style: TextStyle(
                     fontFamily: 'BebasNeue',
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
@@ -580,8 +586,12 @@ class _GameViewState extends ConsumerState<GameView> {
               const SizedBox(height: 8),
               Text(
                 state.isRandomMode
-                    ? 'You sorted this ${state.randomDifficulty} puzzle in ${state.moveCount} moves.'
-                    : 'You sorted Level ${widget.levelNumber} in ${state.moveCount} moves.',
+                    ? AppStrings.t('sorted_random_in_moves', language)
+                        .replaceAll('{difficulty}', (state.randomDifficulty ?? 'Easy').toUpperCase())
+                        .replaceAll('{moves}', state.moveCount.toString())
+                    : AppStrings.t('sorted_level_in_moves', language)
+                        .replaceAll('{level}', widget.levelNumber.toString())
+                        .replaceAll('{moves}', state.moveCount.toString()),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: 'BebasNeue',
@@ -637,24 +647,6 @@ class _GameViewState extends ConsumerState<GameView> {
                       Navigator.pop(context);
                     },
                   ),
-                  const SizedBox(height: 12),
-                  TangibleButton(
-                    text: 'Buy Me a Coffee ☕',
-                    isSecondary: true,
-                    height: 50,
-                    onPressed: () async {
-                      final Uri url = Uri.parse('https://ko-fi.com/sidhant947');
-                      try {
-                        if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
-                          await launchUrl(url, mode: LaunchMode.platformDefault);
-                        }
-                      } catch (_) {
-                        try {
-                          await launchUrl(url, mode: LaunchMode.platformDefault);
-                        } catch (_) {}
-                      }
-                    },
-                  ),
                 ],
               ),
             ],
@@ -697,8 +689,7 @@ class _GameViewState extends ConsumerState<GameView> {
                   ),
                 ),
                 child: const Icon(
-                  Icons.timer_off_rounded,
-                  color: Colors.red,
+                  Icons.timer_off_rounded,                  color: Colors.red,
                   size: 56,
                 ),
               ),
