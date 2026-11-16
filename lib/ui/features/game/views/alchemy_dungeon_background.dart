@@ -1,4 +1,3 @@
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 /// Atmospheric fantasy environments shown behind the potion puzzle.
@@ -10,7 +9,7 @@ class AlchemyDungeonBackground extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final scene = ((level - 1) ~/ 10) % 3;
+    final scene = ((level - 1) ~/ 5) % 3;
     final bounds = Offset.zero & size;
 
     final background = Paint()
